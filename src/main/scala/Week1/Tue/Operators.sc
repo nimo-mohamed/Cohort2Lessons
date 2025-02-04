@@ -77,5 +77,5 @@ false || false
 (4+3)*55 < 300
 (96/12) >= 8
 "Hamster" < "Hippo"
-(8%2) == 0 // Eight is even
+(8%2) == 0 // Eight is even (Modules)
 (156/8) < 20 && 54 <20  && (54/4) < 14
