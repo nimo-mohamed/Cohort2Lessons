@@ -9,7 +9,7 @@
 
 
 //TASK 1
-val studentGrade: Int = -59
+val studentGrade: Int = 58
 
 if (studentGrade >= 90 && studentGrade <= 100) {
   "A! Well done!"
