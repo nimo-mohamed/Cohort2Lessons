@@ -71,3 +71,6 @@ println(f"$person2 is ${person2Age-personAge}%.2f years older than $person")
 //"In|n\n\n\n\n\n\nsameline/n\n"
 
 println(raw"\In|n\n\n\n\n\n\nsameline/n\n")
+
+//Use string interpolation to avoid the new lines from this string. “\n\n\n\n\n\n\n\nsameline\n\n”
+println(raw"\n\n\n\n\n\n\n\nsameline\n\n")
