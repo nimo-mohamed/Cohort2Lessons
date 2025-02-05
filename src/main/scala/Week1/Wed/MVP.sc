@@ -47,4 +47,4 @@ val totalCost = watermelons * pricePerWatermelon
 //%d - Int, Long
 //%s - String
 
-println(f"The total cost of johns purchase is $totalCost%.2f")
+println(f"The total cost of johns purchase is £$totalCost%.2f")
