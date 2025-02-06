@@ -67,7 +67,7 @@ val filteredMap: Map[String, Int] = firstMap.filter(
   number => number._2 >= 2
 )
 // _1 --> is when we want to access the key
-// _2 --> is when we want to access the key
+// _2 --> is when we want to access the value
 
 val filterNotList: List[Int] = firstList.filterNot(
   number => number >= 2 // this is saying if there are any numbers more than or equal to 2 I DONT WANT THEM RETURNED
@@ -88,7 +88,7 @@ val existsSeq: Boolean = firstSeq.exists(number => number >= 7)
 
 val existsList: Boolean = firstList.exists(number => number >= 2)
 
-val exesitsMap: Boolean = firstMap.exists(number => number._2 >= 2)
+val existsMap: Boolean = firstMap.exists(number => number._2 >= 2)
 
 // CONTAINS - give it a specific piece of data to look for.
 
@@ -104,14 +104,22 @@ val containsOrSeq: Boolean = filteredSeq.contains(7) || firstSeq.contains(2)
 // prepend means put something at the start  // append means put something at the end
 
 val x: Seq[Int] = Seq[Int]()
-x :+ 1
-x :+ 2
+x :+ 1 // :+ is the append operator → it tries to add 1 to the sequence.
+x :+ 2 // :+ creates a new sequence instead of modifying the original.
 x // this wont work because its immutable (remember val & var)
 
-val y: Seq[Int] = Seq(3,4,5)
-// Append (add to end)
-val appendY = y:+ 5
-// prepend (add to start)
+// Define an immutable sequence (Seq) of integers with initial values 3, 4, 5
+val y: Seq[Int] = Seq(3, 4, 5)
+
+// Append the number 5 to the sequence using :+ (append operator)
+// Since Seq is immutable, this does NOT modify `y` but creates a new sequence
+val appendY = y :+ 5
+
+// `appendY` now contains: Seq(3, 4, 5, 5)
+// However, `y` remains unchanged as Seq(3, 4, 5)
+
+
+// prepend (add to start) (NOTE TO SELF: :+ ---> add at the end | +: ---> add at the start
 val prependY = 2 +: appendY
 val multipleInts = Seq(0,1,2) +: y
 val multipleInts = Seq(0,1,2) ++ y
