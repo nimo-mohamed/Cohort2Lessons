@@ -11,6 +11,10 @@ val numbersX3: List[Int] = numbers.map(
 //c) Write a function that removes “Blue” from your Seq.
 val removeBlue: Seq[String] = primaryColours.init
 
+val removeBlue: Seq[String] = primaryColours.filter(
+  word => !(word == "blue") // this is the same us the one above ^^
+)
+
 //d) Write a function that returns ‘true’ if your Seq contains “Orange”.
 val containsOrange: Boolean = primaryColours.contains("orange")
 
