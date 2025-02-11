@@ -24,20 +24,28 @@ object CaseClasses extends App {
   val updatesName = superMan.copy(realName = "Andy Probert", weakness = "pints")
   println(updatesName.realName + updatesName.weakness)
 
-  //Task
+  //Task:
   println("\nTask\n")
 
+  // Create a dog case class with parameters of name, breed and age.
   case class Dog(name: String, breedType: String, age: Int)
 
+  //Create 4 dog objects.
   val dog1 = Dog("Bella", "German shepherd", 4)
   val dog2 = Dog("Daisy", "labrador", 6)
   val dog3 = Dog("Lola", "Bulldog", 7)
   val dog4 = Dog("Kiko", "German Shepherd", 8)
 
-
+  //Then create a kennel case class with parameters of name and then a list of the dog case class.
   case class Kennel(name: String, dog: List[Dog])
 
+  //Make a new kennel object and add your dogs (Q.2).
   val myKennel = Kennel("Happy Paws Kennel", List(dog1, dog2, dog3, dog4))
-  println(myKennel)
+  println(s"Original Kennel: $myKennel")
+
+  //The kennel that you have set up wants to change its name but keep the dogs. Use the case class copy method.
+  val newKennel = myKennel.copy(name = "Sunny Days Kennel")
+  println(s"Updated Kennel with New Name: $newKennel")
+
 
 }

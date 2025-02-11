@@ -11,6 +11,13 @@ println(ford.brand) // Come from vehicle
 println(ford.description) // come from vehicle
 
   println("\n----Electric Car------\n")
-  val electricFord = ElectricCar("ford") // new El
+  val electricFord = ElectricCar("Ford") //new ElectricCar object
+  println(electricFord.fuelType)
+  println(electricFord.drive)
+  println(electricFord.brand)
+  println(electricFord.description)
+  println(electricFord.noisyToDrive) //coming from ElectricCar
+  println(electricFord.timeToCharge) //coming from Electric trait
+  println(electricFord.charge) //coming from Electric trait
 
 }

@@ -1,5 +1,10 @@
 package Week2.Mon.MVP
 
-class Warthog (override val name: String, override val age: Int) extends Animal(name, age) with Mammal {
-  def talk: String = "im a warthog"
-}
+case class Warthog (name: String, age: Int, furColour: String, hasTail: Boolean, hasTusks: Boolean) extends Mammal(name, age, furColour, hasTail) with Species
+  {
+
+//    override val speciesName = "Warthog"
+//    override val conservationStatus = "Least Concern"
+//    override val avgLifespanRange = (10, 15)
+//    override val numOfYoungRange = (2, 4)
+  }

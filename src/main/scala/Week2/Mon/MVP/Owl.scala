@@ -1,5 +1,9 @@
 package Week2.Mon.MVP
 
-class Owl (override val name: String, override val age: Int) extends Animal (name, age) with Bird {
-def canFly: Boolean = true
+case class Owl (name: String, age: Int, beakLength: Double, featherColour: String,hootsPerNight: Int) extends Bird(name, age, beakLength, featherColour) with Species {
+
+//  override val speciesName = "Owl"
+//  override val conservationStatus = "Stable"
+//  override val avgLifespanRange = (5, 20)
+//  override val numOfYoungRange = (2, 6)
 }

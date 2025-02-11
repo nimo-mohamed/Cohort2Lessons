@@ -1,6 +1,5 @@
 package Week2.Mon.MVP
 
-trait Bird {
-  val beakLength: Int = 4
-  val featherColour: String = "green"
-}
+
+// Adds bird-specific attributes (beakLength, featherColour). - Adds specific attributes.
+class Bird(name: String, age: Int, val beakLength: Double, val featherColour: String) extends Animal(name, age)
