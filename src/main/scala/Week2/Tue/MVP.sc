@@ -25,7 +25,7 @@ val secondPerson = Person("Carlos", 23, "Spanish", true) // ✅ Correct
 val thirdPerson = Person("Chloe", 25, "British", false) // ✅ Correct
 
 // Invalid case class instantiation (Will Cause Error)
-// val firstPerson = new Person("Carlos", 23, "Spanish", true) ❌ ERROR
+ val firstPerson = new Person("Carlos", 23, "Spanish", true) // this will work but we dont need the word new!
 
 // Valid regular class instantiation
 val dog = new Animal("dog", "white", true) // ✅ Correct
