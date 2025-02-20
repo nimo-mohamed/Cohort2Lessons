@@ -55,7 +55,7 @@ object Options extends App {
   case class ChocolateBar(filling: Option[String])
 
   def getFilling(chocolateBar: ChocolateBar): String =
-    chocolateBar.filling.get0rElse("just chocolate")
+    chocolateBar.filling.getOrElse("just chocolate")
 
   object Snickers extends ChocolateBar(Some("nuts"))
   object DairyMilk extends ChocolateBar(None)
