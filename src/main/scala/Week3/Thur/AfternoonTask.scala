@@ -67,9 +67,9 @@ object AfternoonTask extends App {
                         dateOfDeath: Option[LocalDate]
                         )
 
-  def calculateAge(dateOfBirth: LocalDate, dateOfDeath: Option[LocalDate]): Int = {
-
-  }
+//  def calculateAge(dateOfBirth: LocalDate, dateOfDeath: Option[LocalDate]): Int = {
+//
+//  }
 
   def createPerson(inPutPerson: InPutPerson): Person = ???
 }
