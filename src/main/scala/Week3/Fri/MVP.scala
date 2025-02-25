@@ -7,6 +7,7 @@ object MVP extends App {
   // • Both can take `value: String`
 
   case class Name(value: String)
+
   case class Postcode(value: String)
 
 
@@ -20,7 +21,7 @@ object MVP extends App {
 
   //3. Create a trait called `GenericPostageError`
   //• Give it a parameter method `message` with a type `String`
- trait GenericPostageError {
+  trait GenericPostageError {
     def message: String
   }
 
@@ -34,6 +35,7 @@ object MVP extends App {
   //5. Create a case class called `InvalidPostcodeError`
   //• Give it a parameter `message` with a type `String`
   //• Let it be extended by `GenericPostageError`
+
   case class InvalidPostcodeError(message: String) extends GenericPostageError
 
 
@@ -41,8 +43,8 @@ object MVP extends App {
   //create the following values that have a type `Either [GenericPostageError, Letter]`
   //• `val letter`: A letter constructed using the `.apply` method of `Letter`
   //• `val invalidLetter`: An error constructed using the `.apply` method of `InvalidNameError`
-object EitherLogic extends App {
-    val letter: Right [Nothing, Letter] = Right(Letter(Name("A letter"), Postcode("BS5 7UP")))
+  object EitherLogic extends App {
+    val letter: Right[Nothing, Letter] = Right(Letter(Name("A letter"), Postcode("BS5 7UP")))
     val invalidLetter: Left[InvalidNameError, Nothing] = Left(InvalidNameError("The name is invalid."))
 
     println(letter)
@@ -54,7 +56,14 @@ object EitherLogic extends App {
   //• `val invalidLetter: Left [InvalidNameError, Nothing]`
   //• These are still valid types!
 
+  val letter: Right[Nothing, Letter] = Right(Letter(Name("Simon Singh"), Postcode("AB12 CD3"))) //Q7
+
+  val invalidLetter: Left[InvalidNameError, Nothing] = Left(InvalidNameError("Not a name!!!")) //Q7
+
   //8. Print the values above, can you see if it's a `Right` or `Left`?
+
+  println("Right of a valid letter: " + letter) //Q8
+  println("Left of an invalid letter: " + invalidLetter) //Q8
 
   //9. Create companion object to `PostCode` and inside it:
   //• Create a method called `postcodeOrError` with the return type of `Either [InvalidPostcodeError, Postcode]`
@@ -62,6 +71,13 @@ object EitherLogic extends App {
   //• If the `maybePostCode` is two Strings with a whitespace in between them, then return a `Postcode`. (You might need to do a little research here!!)
   //• However, if the above condition is not satisfied, return an `InvalidPostcodeError`
 
+  object Postcode { //Q9
+    def postcodeOrError(maybePostCode: String): Either[InvalidPostcodeError, Postcode] =
+      maybePostCode match {
+        case postcode if postcode.split(" ").length == 2 => Right(Postcode(maybePostCode))
+        case _ => Left(InvalidPostcodeError("Not a valid postcode"))
+      }
+  }
 
   // 10. Create companion object to `Name` and inside it:
   //• Create a method called `nameOrError`, with the return type of `Either [InvalidNameError, Name]`
@@ -69,6 +85,14 @@ object EitherLogic extends App {
   //• If the `maybeName` has a number in it, then return an `InvalidNameError`
   //• If the above condition is not satisfied, return a `Name`
 
+  object Name { //Q10
+
+    def nameOrError(maybeName: String): Either[InvalidNameError, Name] =
+      if (maybeName.exists(_.isDigit)) //if it contains an int...
+        Left(InvalidNameError("Not a valid name"))
+      else //if it doesn't...
+        Right(Name(maybeName))
+  }
 
   //11. Create companion object to `Letter` and inside it:
   //• Create a method called `letterOrError`
@@ -76,6 +100,15 @@ object EitherLogic extends App {
   //• Using a for comprehension, use the methods `nameOrError` and `postcodeOrError` to create a `Letter`.
   //• Carefully consider what the return type of the `letterOrError` method should be!
 
+  object Letter { //Q11
+    def letterOrError(maybeName: String, maybePostcode: String): Either[GenericPostageError, Letter] =
+      for {
+        name <- Name.nameOrError(maybeName)
+        postCode <- Postcode.postcodeOrError(maybePostcode)
+      } yield {
+        Letter(name, postCode)
+      }
+  }
 
   //12. Create the following variables inside the EitherLogic Object, using the `.letterOrError` method you created in Q11.
   //• `val letterWithANumberInName`: A letter constructed with a number in the name
@@ -83,7 +116,24 @@ object EitherLogic extends App {
   //• `val letterAllInvalid`: A letter constructed with a number in the name and an invalid postcode
   //• `val letterAllValid`: A letter constructed with a valid name and an valid postcode
 
+  val letterWithANumberInName: Either[GenericPostageError, Letter] =
+    Letter.letterOrError(maybeName = "Simon Singh123", maybePostcode = "AB12 CD3") //Q12
+
+  val letterWithAnInvalidPostcode: Either[GenericPostageError, Letter] =
+    Letter.letterOrError(maybeName = "Simon Singh", maybePostcode = "AB12CD3") //Q12
+
+  val letterAllInvalid: Either[GenericPostageError, Letter] =
+    Letter.letterOrError(maybeName = "Simon Singh123", maybePostcode = "AB12CD3") //Q12
+
+  val letterAllValid: Either[GenericPostageError, Letter] =
+    Letter.letterOrError(maybeName = "Simon Singh", maybePostcode = "AB12 CD3") //Q12
 
   //13. Print the values above, are the error messages and types what you expected? Which error was printed out for `val letterAllInvalid`? Why?
+
+  println("\nMade using the .letterOrError method:")
+  println("Left of a letter due to having numbers in the name: " + letterWithANumberInName) //Q13
+  println("Left of a letter due to having no space in the postcode: " + letterWithAnInvalidPostcode) //Q13
+  println("Left of a letter due to having invalid name and postcode: " + letterAllInvalid) //Q13 Name error printed as checks that first, finds it invalid and then leaves the for comp.
+  println("Right of a valid letter: " + letterAllValid) //Q13
 
 }
